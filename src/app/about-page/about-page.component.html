@@ -1,0 +1,21 @@
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-user"></i> About Page</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a routerLink="/about">About Page</a></li>
+    </ul>
+  </div>
+  <div class="row">
+      <form>
+        <div class="col-md-12 col-lg-12">
+              <ckeditor [editor]="Editor" data="<p>Hello, world!</p>" (ready)="onReady($event)"></ckeditor>
+        </div>
+        <div class="col-md-12 col-lg-12 sbt_btn">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+  </div>
+</main>

@@ -1,0 +1,16 @@
+:host ::ng-deep .ck-editor__editable {
+    min-height: 300px;
+}
+.list-style{
+    list-style-type: none;
+    position: relative;
+    left: 0;
+    right: 0;
+    padding-left: 0;
+}
+.publish_date{
+    margin: 0px 0px 10px 0px;
+}
+.category_list a{
+    font-size: 12px;
+}

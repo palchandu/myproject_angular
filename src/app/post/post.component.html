@@ -1,0 +1,68 @@
+<main class="app-content">
+    
+    <div class="app-title">
+      <div>
+        <h1><i class="fa fa-newspaper-o"></i> Posts Page</h1>
+      </div>
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a routerLink="/post">Posts Page</a></li>
+      </ul>
+      
+    </div>
+    <div class="row">
+        
+          <div class="col-md-8 col-lg-8">
+                <ckeditor [editor]="Editor" data="<p>Hello, world!</p>" (ready)="onReady($event)"></ckeditor>
+          </div>
+          <div class="col-md-2 col-lg-2 category_list">
+              <div *ngIf="error" class="col-sm-12 alert alert-warning">
+                  {{error}}
+                </div>
+                  <h6><b>Category</b></h6>
+                  <ul class="list-style">
+                    <li *ngFor="let list of listCategory"><label><input type="checkbox"> {{list.name}}</label></li>
+                  </ul>
+                  <a href="javascript::void(0)" (click)="open(content)">Add New Category</a>
+              
+          </div>
+          <div class="col-md-2 col-lg-2">
+                  <label><b>Publish Date</b></label>
+                  <div class="input-group">
+                    <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="dp.toggle()" type="button"></button>
+                    </div>
+                  </div>
+                  <br/>
+                  <button type="submit" class="btn btn-primary">Publish</button>
+          </div>
+    </div>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="alert alert-success" *ngIf="msg">
+              <strong>Success!</strong> .{{ msg }}
+            </div>
+        <form #addCategoryForm="ngForm" (ngSubmit)="saveCategory(category)">
+          <div class="form-group" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
+            <label for="name" class="control-label">Category</label>
+            <input type="text" required class="form-control" name="name" [(ngModel)]="category.name" #name="ngModel" id="name" placeholder="Category Name">
+            <span class="help-block" *ngIf="name.invalid && name.touched">
+                Category is required
+            </span>
+          </div>
+          <button type="submit" [disabled]="addCategoryForm.invalid" class="btn btn-primary">Save</button>
+        </form>
+        
+      </div>
+      
+    </ng-template>
+
+  </main>
+  

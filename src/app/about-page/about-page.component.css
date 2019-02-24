@@ -1,0 +1,12 @@
+:host ::ng-deep .ck-editor__editable {
+    min-height: 300px;
+}
+form{
+    width: 100%;
+}
+.sbt_btn{
+    margin: 1% 0 0 0;
+}
+.sbt_btn button {
+    float: right;
+}
