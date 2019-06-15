@@ -13,15 +13,17 @@ import { map } from "rxjs/operators";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  submitted = false;
+  list:Category[];
   constructor(private modalService: NgbModal,private _categoryService:CategoryService,private formBuilder: FormBuilder) { 
     
   }
  
+  async ngOnInit() {
+    const list=await this._categoryService.getCategory(); 
+  }
  
-  
-  ngOnInit() {}
-   
-  
+
   }
 
   

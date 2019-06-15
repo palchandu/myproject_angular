@@ -8,12 +8,13 @@ import { from, Observable } from 'rxjs/';
 export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
-  getCategory():Observable<Category[]>{
-    return this.httpClient.get<Category[]>('http://localhost:3000/category/get_category');
+  async getCategory():Promise<Category[]>{
+    const list=await this.httpClient.get<Category[]>('http://localhost:4500/category/get_category').toPromise();
+    return list;
   }
 
   addCategory(category:Category):Observable<any[]>{
-    return this.httpClient.post<any[]>('http://localhost:3000/category/new_category',category,{
+    return this.httpClient.post<any[]>('http://localhost:4500/category/new_category',category,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
     })

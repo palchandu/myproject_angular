@@ -14,10 +14,13 @@
     <div class="row">
         
           <div class="col-md-8 col-lg-8">
-              
+              <textarea class="form-control" rows="15"></textarea>
           </div>
           <div class="col-md-2 col-lg-2 category_list">
-              
+            <!-- <label formArrayName="categories" *ngFor="let category of postForm.controls.categories.controls; let i = index">
+              <input type="checkbox" [formControlName]="i">
+              {{category[i].name}}
+            </label> -->
           </div>
          
     </div>
