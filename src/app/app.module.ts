@@ -6,6 +6,8 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './error-handler';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +18,7 @@ import { PostComponent } from './post/post.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CategoryService } from './services/category.service';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './profile/profile.service';
 const appRout:Routes=[
   { path:'dashboard',component:DashboardComponent},
   { path:'login',component:LoginComponent},
@@ -42,6 +45,8 @@ const appRout:Routes=[
     FormsModule,
     CKEditorModule,
     ReactiveFormsModule,
+    FlashMessagesModule.forRoot(),
+    EditorModule
   ],
   providers: [
     {
@@ -49,7 +54,8 @@ const appRout:Routes=[
       useClass: HttpErrorInterceptor,
       multi: true,
     },
-    CategoryService
+    CategoryService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

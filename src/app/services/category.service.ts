@@ -8,8 +8,9 @@ import { from, Observable } from 'rxjs/';
 export class CategoryService {
 
   constructor(private httpClient: HttpClient) { }
-  getCategory():Observable<Category[]>{
+   getCategory(){
     return this.httpClient.get<Category[]>('http://localhost:3000/category/get_category');
+  
   }
 
   addCategory(category:Category):Observable<any[]>{
