@@ -13,17 +13,47 @@ import { map } from "rxjs/operators";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  submitted = false;
-  list:Category[];
-  constructor(private modalService: NgbModal,private _categoryService:CategoryService,private formBuilder: FormBuilder) { 
-    
-  }
- 
-  async ngOnInit() {
-    const list=await this._categoryService.getCategory(); 
-  }
- 
 
+  listCategory:Category[];
+  postForm:FormGroup;
+  submitted = false;
+  error='';
+  
+  constructor(private fb:FormBuilder,private _categoryService:CategoryService) {}
+
+  
+
+  async ngOnInit() { 
+    const list=await this._categoryService.getCategory(); 
+    /*List of category */
+    var categoryFormGroup:FormGroup=new FormGroup({});
+
+    this._categoryService.getCategory().subscribe(res=>{
+      this.listCategory=res;
+      for(let index = 0; index < this.listCategory.length; index++){
+        let control:FormControl=new FormControl(this.listCategory[index]['name'],Validators.required);
+        var vals=this.listCategory[index]['name'];
+        categoryFormGroup.addControl('hello',control);
+      }
+      console.log(categoryFormGroup);
+    });
+
+    
+    this.postForm=this.fb.group({
+        post_body:['',[Validators.required]],
+        categories:categoryFormGroup
+    });
+  }
+
+  get f() { return this.postForm.controls; }
+  publishBlog():void{
+    this.submitted = true;
+    if (this.postForm.invalid) {
+      return;
+  }
+    console.log(this.f.post_body.value);
+  }
+ 
   }
 
   

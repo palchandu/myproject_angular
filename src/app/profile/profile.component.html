@@ -11,6 +11,7 @@
   </div>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="row">
+      <flash-messages></flash-messages>
     <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="form-group">
               <label>Profile Name</label>
@@ -48,9 +49,9 @@
             </div>
           <div class="form-group">
               <label>Profile Image</label>
-                <input type="text" readonly class="form-control"  formControlName="profile_pic" [ngClass]="{ 'is-invalid': submitted && f.profile_pic.errors}"/>
-                <input type="file">
-                <button type="button" class="btn btn-primary">Upload</button>
+                <input type="text"  readonly class="form-control"  formControlName="profile_pic" [ngClass]="{ 'is-invalid': submitted && f.profile_pic.errors}"/>
+                <input type="file" (change)="uploadProfile($event)">
+                <button type="button" (click)="onProfileUpload()" class="btn btn-primary">Upload</button>
 
                 <span class="help-block"
                     *ngIf="submitted && f.profile_pic.errors" class="invalid-feedback">
@@ -70,7 +71,12 @@
                       </span>
                 </span>
             </div>
-          <button type="submit" class="btn btn-info">Update</button>
+            <div class="form-group">
+                <input type="hidden" name="profileId" formControlName="profileId" />
+                <button type="submit" class="btn btn-info">Update</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+            
     </div>
   </div>
 </form> 
