@@ -5,4 +5,5 @@ export class Profile{
     organisation:String;
     image:String;
     copyright:String;
+    
 }

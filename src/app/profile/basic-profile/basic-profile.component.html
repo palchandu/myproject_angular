@@ -1,0 +1,29 @@
+<flash-messages></flash-messages>
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fullname">Fullname</label>
+      <input type="text" formControlName="fullName" class="form-control" [ngClass]="{'is-invalid':submitted && f.fullName.errors}" placeholder="Fullname">
+      <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+        <div *ngIf="f.fullName.errors.required">FullName is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="designation">Designation</label>
+        <input type="text" class="form-control" formControlName="designation" [ngClass]="{'is-invalid':submitted && f.designation.errors}" placeholder="Designation">
+        <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+          <div *ngIf="f.designation.errors.required">Designation is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="organisation">Organisation</label>
+        <input type="text" formControlName="organisation" class="form-control" [ngClass]="{'is-invalid':submitted && f.organisation.errors}" placeholder="Organisation">
+        <div *ngIf="submitted && f.organisation.errors" class="invalid-feedback">
+          <div *ngIf="f.organisation.errors.required">Organisation is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

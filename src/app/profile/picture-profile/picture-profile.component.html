@@ -1,0 +1,21 @@
+<flash-messages></flash-messages>
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <p><strong>Profile Picture</strong></p>
+    <img style="height:200px; width:200px;" src="{{image_url}}" class="img-responsive"/>
+</div>
+
+<div class="col-sm-12 col-md-12 col-lg-12">
+  <form [formGroup]="profilePictureForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="image_url">Image URL</label>
+      
+      <input type="text" class="form-control" value="{{image_url}}" readonly formControlName="profile_pic" [ngClass]="{ 'is-invalid': submitted && f.profile_pic.errors}">
+    </div>
+    <div class="form-group">
+      <input type="file" (change)="uploadProfile($event)">
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" (click)="onProfileUpload()">Upload</button>
+    </div>
+  </form>
+</div>

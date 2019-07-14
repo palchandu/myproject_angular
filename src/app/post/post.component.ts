@@ -1,11 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Category } from '../model/category.model';
 import { CategoryService } from '../services/category.service';
 import { FormControl, FormGroup,  FormBuilder,  Validators, FormArray } from '@angular/forms';
-import {Observable} from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-post',
@@ -18,30 +15,38 @@ export class PostComponent implements OnInit {
   postForm:FormGroup;
   submitted = false;
   error='';
-  
+  htmlContent = '';
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '25rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    uploadUrl: 'v1/images', // if needed
+    customClasses: [ // optional
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
   constructor(private fb:FormBuilder,private _categoryService:CategoryService) {}
 
   
 
-  async ngOnInit() { 
-    const list=await this._categoryService.getCategory(); 
-    /*List of category */
-    var categoryFormGroup:FormGroup=new FormGroup({});
-
-    this._categoryService.getCategory().subscribe(res=>{
-      this.listCategory=res;
-      for(let index = 0; index < this.listCategory.length; index++){
-        let control:FormControl=new FormControl(this.listCategory[index]['name'],Validators.required);
-        var vals=this.listCategory[index]['name'];
-        categoryFormGroup.addControl('hello',control);
-      }
-      console.log(categoryFormGroup);
-    });
-
-    
+  ngOnInit() { 
     this.postForm=this.fb.group({
-        post_body:['',[Validators.required]],
-        categories:categoryFormGroup
+        post_body:['',[Validators.required]]
     });
   }
 
@@ -53,6 +58,8 @@ export class PostComponent implements OnInit {
   }
     console.log(this.f.post_body.value);
   }
+
+  
  
   }
 

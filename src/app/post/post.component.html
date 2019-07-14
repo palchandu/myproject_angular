@@ -13,32 +13,13 @@
     <form [formGroup]="postForm" (ngSubmit)="publishBlog()">
     <div class="row">
         
-          <div class="col-md-8 col-lg-8">
-              <textarea class="form-control" rows="15"></textarea>
+          <div class="col-md-12 col-lg-12">
+            <!-- <div [froalaEditor]="options">Hello, Froala!</div> -->
+            <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor>
           </div>
-          <div class="col-md-2 col-lg-2 category_list">
-            <!-- <label formArrayName="categories" *ngFor="let category of postForm.controls.categories.controls; let i = index">
-              <input type="checkbox" [formControlName]="i">
-              {{category[i].name}}
-            </label> -->
-
-              <span class="help-block"
-                *ngIf="submitted && f.post_body.errors" class="invalid-feedback">
-                  <span *ngIf="f.post_body.errors.required">
-                    Content is required.
-                  </span>
-            </span>
-              <editor formControlName="post_body" apiKey="test" [init]="{plugins: 'code',selector:'textarea',max_height: 500,min_height: 500,max_width: 1000,min_width: 700}"></editor>
-          </div>
-          <div class="col-md-2 col-lg-2 category_list">
+          
+          <div class="col-md-12 col-lg-12">
               <button type="submit" class="btn btn-primary">Publish</button>
-              <div formGroupName="categories">
-                  <span *ngFor="let cats of postForm.categories">
-                    <input type="checkbox" [formControlName]="cats.value" [class.invalid]="!postForm.controls.cats.valid">
-                    <label>ppp</label>
-                    </span>
-                  </div>
-
           </div>
          
     </div>

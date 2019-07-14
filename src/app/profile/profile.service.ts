@@ -6,18 +6,20 @@ import { from, Observable } from 'rxjs/';
   providedIn: 'root'
 })
 export class ProfileService {
-  url='http://localhost:3000/common/';
-  url_misc='http://localhost:3000/misc/'
+  url='http://localhost:4500/common/';
+  url_misc='http://localhost:4500/misc/'
   constructor(private httpClient: HttpClient) { }
 
-  getProfile():Observable<Profile[]>{
-    return this.httpClient.get<Profile[]>(this.url_misc+'get_profile');
+  async getProfile():Promise<any[]>{
+    const response=await this.httpClient.get<any[]>(this.url_misc+'get_profile').toPromise();
+    return response;
   }
   addPicture(profile_picture):Observable<any[]>{
     return this.httpClient.post<any[]>(this.url+'upload',profile_picture);
   }
-  addProfile(profile_details:Profile):Observable<any[]>{
-    return this.httpClient.post<any[]>(this.url_misc+'add_profile',profile_details);
+  async addProfile(profile_details):Promise<any[]>{
+    const response=await this.httpClient.post<any[]>(this.url_misc+'add_profile',profile_details).toPromise();
+    return response;
   }
   updateProfile(profile_details:Profile):Observable<any[]>{
     return this.httpClient.post<any[]>(this.url_misc+'update_profile',profile_details);

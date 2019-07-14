@@ -9,76 +9,16 @@
       <li class="breadcrumb-item"><a routerLink="/post">Profile Page</a></li>
     </ul>
   </div>
-  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="row">
-      <flash-messages></flash-messages>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-          <div class="form-group">
-              <label>Profile Name</label>
-                <input type="text" class="form-control" name="fullname" formControlName="fullname" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors}" placeholder="Profile Name">
-                <span class="help-block"
-                    *ngIf="submitted && f.fullname.errors" class="invalid-feedback">
-                      <span *ngIf="f.fullname.errors.required">
-                        Full Name is required
-                      </span>
-                      <span *ngIf="f.fullname.errors.minlength || f.fullname.errors.maxlength">
-                          Full Name must be greater than 2 characters and less than 10 characters
-                      </span>
-                </span>
-
-          </div>
-          <div class="form-group">
-              <label>Designation</label>
-              <input type="text" class="form-control" name="designation" formControlName="designation" placeholder="Designation" [ngClass]="{ 'is-invalid': submitted && f.designation.errors}">
-              <span class="help-block"
-                    *ngIf="submitted && f.designation.errors" class="invalid-feedback">
-                      <span *ngIf="f.designation.errors.required">
-                        Designation is required
-                      </span>
-                </span>
-            </div>
-          <div class="form-group">
-              <label>Organisation</label>
-              <input type="text" class="form-control" name="organisation"   formControlName="organisation" placeholder="Organisation" [ngClass]="{ 'is-invalid': submitted && f.organisation.errors}">
-              <span class="help-block"
-                    *ngIf="submitted && f.organisation.errors" class="invalid-feedback">
-                      <span *ngIf="f.organisation.errors.required">
-                        Organisation is required.
-                      </span>
-                </span>
-            </div>
-          <div class="form-group">
-              <label>Profile Image</label>
-                <input type="text"  readonly class="form-control"  formControlName="profile_pic" [ngClass]="{ 'is-invalid': submitted && f.profile_pic.errors}"/>
-                <input type="file" (change)="uploadProfile($event)">
-                <button type="button" (click)="onProfileUpload()" class="btn btn-primary">Upload</button>
-
-                <span class="help-block"
-                    *ngIf="submitted && f.profile_pic.errors" class="invalid-feedback">
-                      <span *ngIf="f.profile_pic.errors.required">
-                        Profile image is required.
-                      </span>
-                </span>
-
-              </div>
-          <div class="form-group">
-              <label>Copyright</label>
-              <textarea class="form-control"  formControlName="copyright" [ngClass]="{ 'is-invalid': submitted && f.copyright.errors}"></textarea>
-              <span class="help-block"
-                    *ngIf="submitted && f.copyright.errors" class="invalid-feedback">
-                      <span *ngIf="f.copyright.errors.required">
-                        Copyright is required
-                      </span>
-                </span>
-            </div>
-            <div class="form-group">
-                <input type="hidden" name="profileId" formControlName="profileId" />
-                <button type="submit" class="btn btn-info">Update</button>
-                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            </div>
-            
+    <div class="tab">
+      <a class="links" routerLinkActive="active" routerLink='profile_basic'>Profile Basic</a>
+      <a class="links" routerLinkActive="active" routerLink='profile_picture'>Profile Picture</a>
+      <a class="links" routerLinkActive="active" routerLink='copyright'>Copyright</a>
+    </div>
+    
+    <div id="HTML" class="content">
+      <router-outlet></router-outlet>
     </div>
   </div>
-</form> 
 </main>
 

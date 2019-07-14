@@ -11,6 +11,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { from } from 'rxjs';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AboutPageComponent } from './about-page/about-page.component';
@@ -19,12 +20,21 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CategoryService } from './services/category.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
+import { BasicProfileComponent } from './profile/basic-profile/basic-profile.component';
+import { PictureProfileComponent } from './profile/picture-profile/picture-profile.component';
+import { CopyrightComponent } from './profile/copyright/copyright.component';
 const appRout:Routes=[
   { path:'dashboard',component:DashboardComponent},
   { path:'login',component:LoginComponent},
   { path:'about',component:AboutPageComponent},
   { path:'post',component:PostComponent},
-  { path:'profile',component:ProfileComponent},
+  { path:'profile',component:ProfileComponent,children:[
+    {path:'profile_basic',component:BasicProfileComponent},
+    {path:'profile_picture',component:PictureProfileComponent},
+    {path:'copyright',component:CopyrightComponent},
+    {path:'',redirectTo:'profile_basic',pathMatch:'full'}
+    ]
+  },
   { path:'',redirectTo:'/dashboard',pathMatch:'full'}
 ];
 @NgModule({
@@ -35,6 +45,9 @@ const appRout:Routes=[
     AboutPageComponent,
     PostComponent,
     ProfileComponent,
+    BasicProfileComponent,
+    PictureProfileComponent,
+    CopyrightComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +59,8 @@ const appRout:Routes=[
     CKEditorModule,
     ReactiveFormsModule,
     FlashMessagesModule.forRoot(),
-    EditorModule
+    EditorModule,
+    AngularEditorModule
   ],
   providers: [
     {
