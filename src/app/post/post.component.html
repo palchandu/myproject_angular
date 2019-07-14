@@ -1,4 +1,4 @@
-<main class="app-content">
+<main class="app-content" style="background-color:white">
     
     <div class="app-title">
       <div>
@@ -12,16 +12,14 @@
     </div>
     <form [formGroup]="postForm" (ngSubmit)="publishBlog()">
     <div class="row">
-        
           <div class="col-md-12 col-lg-12">
-            <!-- <div [froalaEditor]="options">Hello, Froala!</div> -->
-            <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor>
+            <angular-editor id="editor1" formControlName="htmlContent" [config]="config"></angular-editor>
           </div>
-          
-          <div class="col-md-12 col-lg-12">
-              <button type="submit" class="btn btn-primary">Publish</button>
-          </div>
-         
+    </div>
+    <div class="row" style="margin-top:2%;">
+      <div class="col-md-12 col-lg-12">
+          <button type="submit" class="btn btn-primary">Publish</button>
+      </div>
     </div>
   </form> 
   </main>

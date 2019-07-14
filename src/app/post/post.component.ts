@@ -16,27 +16,29 @@ export class PostComponent implements OnInit {
   submitted = false;
   error='';
   htmlContent = '';
-  editorConfig: AngularEditorConfig = {
+  config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '25rem',
-    minHeight: '5rem',
+    minHeight: '20rem',
+    maxHeight: '50rem',
     placeholder: 'Enter text here...',
     translate: 'no',
-    uploadUrl: 'v1/images', // if needed
-    customClasses: [ // optional
+    sanitize: false,
+    toolbarPosition: 'top',
+    defaultFontName: 'Arial',
+    customClasses: [
       {
-        name: "quote",
-        class: "quote",
+        name: 'quote',
+        class: 'quote',
       },
       {
         name: 'redText',
         class: 'redText'
       },
       {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
       },
     ]
   };
