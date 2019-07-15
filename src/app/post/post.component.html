@@ -10,10 +10,21 @@
       </ul>
       
     </div>
+    <div class="row" style="margin-bottom:5%;">
+      <div class="col-sm-1 col-md-1 col-lg-1">
+        <button type="button" class="btn btn-lg btn-primary" (click)="openScrollableContent(longContent)">Media</button>
+      </div>
+      <div class="col-sm-11 col-md-11 col-lg-11">
+        <p class="img-link" *ngIf="imageUrl">{{imageUrl}}</p>
+      </div>
+    </div>
     <form [formGroup]="postForm" (ngSubmit)="publishBlog()">
     <div class="row">
           <div class="col-md-12 col-lg-12">
-            <angular-editor id="editor1" formControlName="htmlContent" [config]="config"></angular-editor>
+            <angular-editor id="editor1" formControlName="htmlContent" [config]="config" [ngClass]="{'is-invalid':submitted && f.htmlContent.errors}"></angular-editor>
+            <div *ngIf="submitted && f.htmlContent.errors" class="invalid-feedback">
+              <div *ngIf="f.htmlContent.errors.required">Content is required.</div>
+            </div>
           </div>
     </div>
     <div class="row" style="margin-top:2%;">
@@ -22,5 +33,23 @@
       </div>
     </div>
   </form> 
+  
+  <ng-template #longContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Media Gallery</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <a href="javascript::void(0)" *ngFor="let image_url of datas[0]" class="col-sm-2 col-md-2 col-lg-2" (click)="getUrl($event,image_url['imagePath'])">
+        <img  src="{{image_url['imagePath']}}" width="150px" height="200px"/>
+      </a>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
   </main>
   

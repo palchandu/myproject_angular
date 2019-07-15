@@ -3,7 +3,9 @@ import { Category } from '../model/category.model';
 import { CategoryService } from '../services/category.service';
 import { FormControl, FormGroup,  FormBuilder,  Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-
+import { NgbModal,NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { PostServiceService } from './post-service/post-service.service';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -16,6 +18,10 @@ export class PostComponent implements OnInit {
   submitted = false;
   error='';
   htmlContent = '';
+  closeResult: string;
+  imageUrl:string;
+  datas=[];
+  modalReference: NgbModalRef;
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -42,14 +48,19 @@ export class PostComponent implements OnInit {
       },
     ]
   };
-  constructor(private fb:FormBuilder,private _categoryService:CategoryService) {}
+  constructor(private fb:FormBuilder,private _categoryService:CategoryService,private modalService: NgbModal,private postService:PostServiceService) {}
 
-  
+  async getAllImages(){
+    //this.datas=await this.postService.getImages();
+    this.datas.push(await this.postService.getImages());
+  }
 
   ngOnInit() { 
     this.postForm=this.fb.group({
-        post_body:['',[Validators.required]]
+      htmlContent:['',[Validators.required]]
     });
+    this.getAllImages();
+    console.log(this.datas);
   }
 
   get f() { return this.postForm.controls; }
@@ -58,10 +69,25 @@ export class PostComponent implements OnInit {
     if (this.postForm.invalid) {
       return;
   }
-    console.log(this.f.post_body.value);
+    console.log(this.f.htmlContent.value);
   }
 
-  
+  /**
+   * 
+   *  Modal Open
+   */
+
+  openScrollableContent(longContent) {
+    this.modalReference=this.modalService.open(longContent, { scrollable: true,size: 'xl' });
+  }
+
+  getUrl(event,image){
+    event.preventDefault();
+    this.imageUrl=image;
+    this.modalReference.close();
+    console.log(image);
+  }
+
  
   }
 

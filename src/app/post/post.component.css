@@ -17,3 +17,10 @@
 #editor1{
     background: white;
 }
+.img-link{
+    border: 1px solid lavender;
+    padding: 5px;
+    cursor: pointer;
+    color: cornflowerblue;
+    margin-left: 10px
+}

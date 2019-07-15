@@ -21,6 +21,7 @@ import { ProfileService } from './profile/profile.service';
 import { BasicProfileComponent } from './profile/basic-profile/basic-profile.component';
 import { PictureProfileComponent } from './profile/picture-profile/picture-profile.component';
 import { CopyrightComponent } from './profile/copyright/copyright.component';
+import { PostServiceService } from './post/post-service/post-service.service';
 const appRout:Routes=[
   { path:'dashboard',component:DashboardComponent},
   { path:'login',component:LoginComponent},
@@ -65,7 +66,8 @@ const appRout:Routes=[
       multi: true,
     },
     CategoryService,
-    ProfileService
+    ProfileService,
+    PostServiceService
   ],
   bootstrap: [AppComponent]
 })
