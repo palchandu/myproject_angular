@@ -27,7 +27,7 @@
     "@ngtools/webpack": "^8.1.1",
     "@tinymce/tinymce-angular": "^3.2.0",
     "angular2-flash-messages": "^3.0.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.9",
     "form-data": "^2.5.0",
